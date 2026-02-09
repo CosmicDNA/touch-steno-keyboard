@@ -33,7 +33,7 @@ This application functions as a web-based stenography keyboard that securely con
 
 Follow these steps to connect the web keyboard to Plover.
 
-### Step 1: Install and Configure the Touch Tablets Plover Plugin
+### Step 1: Install and Configure the Plover Touch Tablets Plugin
 
 <!-- 1.  **Install the Plugin**: The recommended way to install [touch-tablets plugin](https://github.com/CosmicDNA/touch-tablets) is through Plover's built-in Plugin Manager.
     -   In Plover, go to **Tools -> Plugins Manager**.
@@ -43,7 +43,7 @@ Follow these steps to connect the web keyboard to Plover.
 1.  **Install the Plugin**: To install the plugin use the `plover_console` command from within your Plover installation folder as follows:
 
 ```PowerShell
-.\plover_console -s plover_plugins install git+https://github.com/CosmicDNA/touch-tablets.git
+.\plover_console -s plover_plugins install git+https://github.com/CosmicDNA/plover-touch-tablets.git
 ```
 
 2.  **Enable the Steno Tablets Plugin**:
