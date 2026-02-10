@@ -126,6 +126,21 @@ https://github.com/CosmicDNA/touchscreen-stenography-keyboard/assets/92752640/c5
 
 *Usage example for typing*
 
+### Lookup Mode
+
+This application includes a lookup mode for use once the app is connected to Plover. To use it simply append `?lookup=` followed by the lookup phrase you want.
+
+For example: https://touch.stenography.cosmicdna.co.uk/?lookup=`Hello to you all!` results in:
+
+<p align="center">
+  <a href="assets/lookup%20mode.png">
+    <img src="assets/lookup%20mode.png" alt="Lookup Mode" />
+  </a>
+  <br/>
+  <em>The lookup mode is entered upon using a lookup URL search parameter.</em>
+</p>
+
+Where the strokes are pressed rythmically suggesting the user to type with perhaps the most efficient typing chords.
 
 ## Development
 
