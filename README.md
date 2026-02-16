@@ -44,8 +44,8 @@ Follow these steps to connect the web keyboard to Plover.
 > Alternativelly, to install the plugin use the `plover_console` command from within your Plover installation folder as follows:
 >
 > ```PowerShell
-.\plover_console -s plover_plugins install git+https://github.com/CosmicDNA/plover-touch-tablets.git
-```
+> .\plover_console -s plover_plugins install git+https://github.com/CosmicDNA/plover-touch-tablets.git
+> ```
 
 2.  **Enable the Steno Tablets Plugin**:
     -   In Plover's main window, click the **Configure** button (the gear icon).
