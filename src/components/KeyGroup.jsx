@@ -1,7 +1,8 @@
-import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import React, { memo } from 'react'
+import { Material, Vector3 } from 'three'
+
 import AnyKey from './AnyKey'
-import { Vector3, Material } from 'three'
 import useKeyGeometry from './hooks/useKeyGeometry' // Import Material
 
 const RawKey = ({ geometry, name, position, theKey, i, ...props }) => {

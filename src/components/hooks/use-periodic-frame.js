@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
+import { useEffect, useRef } from 'react'
 
 const usePeriodicFrame = (callback, { enabled = true, period = 0.1 }) => {
   const lastTimeRef = useRef(0)

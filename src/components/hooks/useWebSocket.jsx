@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
-import useWebSocket, { ReadyState } from 'react-use-websocket'
-import React, { createContext, useContext, useEffect, useMemo, useCallback, memo, useState, useRef } from 'react'
-import { useTunnelContext } from './useTunnel'
-import { getEncryptedMessage, getDecryptedMessage, newNonce, getBox } from '../utils/encryptionWrapper'
-import ColoredCircle from '../ColoredCircle'
+import React, { createContext, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
+
+import ColoredCircle from '../ColoredCircle'
+import { getBox, getDecryptedMessage, getEncryptedMessage, newNonce } from '../utils/encryptionWrapper'
+import { useTunnelContext } from './useTunnel'
 
 const { CONNECTING, OPEN, CLOSING, CLOSED, UNINSTANTIATED } = ReadyState
 
@@ -17,7 +18,7 @@ const mappingReadyStateToColor = {
 }
 
 const Url = ({ url }) => (
-  <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: 'lightblue' }}>
+  <a href={url} target='_blank' rel='noopener noreferrer' style={{ color: 'lightblue' }}>
     {url}
   </a>
 )
@@ -112,7 +113,6 @@ const useWebSocketContext = () => useContext(WebSocketContext)
  * @param {Object} props.queryParams
  */
 const RawWebSocketProvider = ({ children, url, queryParams }) => {
-  // eslint-disable-next-line no-unused-vars
   const [closeEvent, setCloseEvent] = useState(null)
   const [pcPublicKey, setPcPublicKey] = useState(null)
   const secretOrSharedKey = useMemo(() => (pcPublicKey ? getBox(pcPublicKey) : null), [pcPublicKey])
@@ -215,20 +215,21 @@ const RawWebSocketProvider = ({ children, url, queryParams }) => {
 
   return (
     <>
-      {<status.In>
+      <status.In>
         <>
           <ColoredCircle
             color={mappingReadyStateToColor[readyState]}
             glow={readyState !== OPEN}
           />
         </>
-      </status.In>}
+      </status.In>
       <Provider value={{
         readyState,
         lastJsonMessage,
         sendJsonMessage,
         secretOrSharedKey
-      }}>
+      }}
+      >
         {children}
       </Provider>
     </>
@@ -243,4 +244,4 @@ RawWebSocketProvider.propTypes = {
   queryParams: PropTypes.object
 }
 
-export { useWebSocketContext, WebSocketProvider, ReadyState }
+export { ReadyState, useWebSocketContext, WebSocketProvider }

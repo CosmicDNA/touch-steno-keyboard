@@ -1,9 +1,10 @@
+import { useThree } from '@react-three/fiber'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
-import { getCircularPoints, eqSet } from './utils/tools'
-import { Vector2, Raycaster } from 'three'
+import { Raycaster, Vector2 } from 'three'
+
 import useMultiTouchDrag from './hooks/use-multi-touch-drag'
-import { useThree } from '@react-three/fiber'
+import { eqSet, getCircularPoints } from './utils/tools'
 // import { useTunnelContext } from './hooks/useTunnel'
 // import JSONPretty from 'react-json-pretty'
 

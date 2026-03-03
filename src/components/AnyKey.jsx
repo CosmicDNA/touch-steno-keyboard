@@ -1,9 +1,10 @@
+import { Text3D } from '@react-three/drei'
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import { ExtrudeGeometry, Material } from 'three'
-import useMount from './hooks/useMount'
-import { Text3D } from '@react-three/drei'
+
 import InterMediumRegular from '../fonts/Inter_Medium_Regular.json'
+import useMount from './hooks/useMount'
 
 /**
  * Represents a Key component.
@@ -43,36 +44,28 @@ const AnyKey = ({ geometry, offsetX = 0, offsetY = 0, scale = 1, lateral = 7 / 1
       name='key group'
     >
       <group
-
         rotation-x={pressed ? Math.PI / 32 / armLength : 0}
-
         position-y={armLength}
       >
         <mesh
-
           position-y={-lateral - armLength}
-
           userData={{ keyId }}
-
           castShadow
-
           receiveShadow
-
           geometry={geometry}
         >
           {materials.map((material, i) =>
-            <primitive key={i}
-
+            <primitive
+              key={i}
               object={material}
-
-              attach={`material-${i}`} />
+              attach={`material-${i}`}
+            />
           )}
         </mesh>
         {show3DText &&
           <Text3D font={InterMediumRegular} size={0.2 * scale} height={0.01} position={[-0.07 + offsetX, -0.6 + offsetY - armLength, 0.1]}>
             {keyId.replace('-', '')}
-          </Text3D>
-        }
+          </Text3D>}
       </group>
     </group>
   )

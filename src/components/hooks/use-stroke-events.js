@@ -1,5 +1,6 @@
-import usePeriodicFrame from './use-periodic-frame'
 import { useMemo, useRef } from 'react'
+
+import usePeriodicFrame from './use-periodic-frame'
 
 const useStrokeEvents = (straightForwardStrokes, { ratio = 6, pauseSeconds = 3, resolution = 10, enabled, nextObjectCallback = () => {}, nextStrokeCallback = () => {}, nextStrokeCallbackDT = () => {} }) => {
   const { allStenoKeys, cumulativeStrokeLengths } = useMemo(() => {

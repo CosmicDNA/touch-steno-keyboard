@@ -1,21 +1,22 @@
 import PropTypes from 'prop-types'
-import React, { useState, useRef, useEffect, useMemo } from 'react'
-import KeyGroup from './KeyGroup'
-import Key from './Key'
-import { Vector3, MeshLambertMaterial, Color } from 'three'
-// import keySets from './steno-script'
-import { useSound } from './hooks/use-sound'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { toast } from 'react-toastify'
+import { Color, MeshLambertMaterial, Vector3 } from 'three'
+
 import keypressAudioFile from '../sounds/keypress.flac'
 import keyreleaseAudioFile from '../sounds/keyrelease.flac'
-import { useWebSocketContext, ReadyState } from './hooks/useWebSocket'
-import usePrevious from './hooks/usePrevious'
-import { getAddedAndRemovedItems, dep } from './utils/tools'
-import useWakeLock from './hooks/useWakeLock'
-import KeyPressDetectionFloor from './KeyPressDetectionFloor'
-import { toast } from 'react-toastify'
-import { LookupStateEnum, convertLookupStrokeToKeysSequence } from './utils/lookup'
+// import keySets from './steno-script'
+import { useSound } from './hooks/use-sound'
 import useStrokeEvents from './hooks/use-stroke-events'
 import useUrlParam from './hooks/use-url-param'
+import usePrevious from './hooks/usePrevious'
+import useWakeLock from './hooks/useWakeLock'
+import { ReadyState, useWebSocketContext } from './hooks/useWebSocket'
+import Key from './Key'
+import KeyGroup from './KeyGroup'
+import KeyPressDetectionFloor from './KeyPressDetectionFloor'
+import { convertLookupStrokeToKeysSequence, LookupStateEnum } from './utils/lookup'
+import { dep, getAddedAndRemovedItems } from './utils/tools'
 
 const enter = 0.2
 const rowSpacing = 1.3
@@ -83,7 +84,7 @@ const rowItems = config.filter(o => o.type === 'Row')
 const emptySet = new Set()
 const StenoKeyboard = ({ controls, isTouchDevice, ...props }) => {
   const ref = useRef()
-  // eslint-disable-next-line no-unused-vars
+
   const [soundEnabled, setSoundEnabled] = useState(false)
   const [straightForwardStrokes, setStraightForwardStrokes] = useState([])
   const [largestKeySet, setLargestKeySet] = useState(new Set())

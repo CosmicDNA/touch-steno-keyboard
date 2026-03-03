@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
-import { Shape, Vector2, ExtrudeGeometry } from 'three'
+import { ExtrudeGeometry, Shape, Vector2 } from 'three'
+
 import { getCircularPoints } from '../utils/tools'
 
 const useKeyGeometry = ({

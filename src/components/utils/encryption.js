@@ -1,11 +1,11 @@
+import { Buffer } from 'buffer'
 import { box, randomBytes } from 'tweetnacl'
 import {
+  decodeBase64,
   decodeUTF8,
-  encodeUTF8,
   encodeBase64,
-  decodeBase64
+  encodeUTF8
 } from 'tweetnacl-util'
-import { Buffer } from 'buffer'
 
 /**
  *
@@ -112,4 +112,4 @@ const hexEncode = (uint8Array) => Array.from(uint8Array)
  */
 const hexDecode = (hexEncodedString) => Uint8Array.from(Buffer.from(hexEncodedString, 'hex'))
 
-export { generateKeyPair, encrypt, decrypt, urlSafeEncrypt, box, hexEncode, hexDecode, newNonce }
+export { box, decrypt, encrypt, generateKeyPair, hexDecode, hexEncode, newNonce, urlSafeEncrypt }
