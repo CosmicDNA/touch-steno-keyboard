@@ -1,5 +1,5 @@
 {
-  "name": "touchscreen-stenography-keyboard",
+  "name": "touch-steno-keyboard",
   "version": "1.0.0",
   "description": "Touchscreen stegraphy keyboard.",
   "keywords": [
@@ -7,16 +7,17 @@
     "keyboard",
     "stenography"
   ],
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "license": "MIT",
   "dependencies": {
-    "@react-three/drei": "9.99.4",
+    "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "8.15.16",
     "@types/emscripten": ">=1.39.6",
     "@yudiel/react-qr-scanner": "^2.5.0",
     "howler": "^2.2.4",
     "jotai": "^2.7.0",
     "leva": "^0.9.35",
+    "lodash": "^4.17.23",
     "motion": "^12.23.22",
     "r3f-perf": "^7.2.3",
     "react": "18.2.0",
@@ -24,41 +25,46 @@
     "react-json-pretty": "^2.2.0",
     "react-toastify": "^11.0.5",
     "react-use-websocket": "^4.8.1",
-    "three": "0.161.0",
     "tunnel-rat": "^0.1.2",
     "tweetnacl": "^1.0.3",
     "tweetnacl-util": "^0.15.1",
     "util": "^0.12.5"
+  },
+  "peerDependencies": {
+    "three": "0.170.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@babel/plugin-syntax-flow": "^7.23.3",
     "@babel/plugin-transform-private-property-in-object": "^7.27.1",
     "@babel/plugin-transform-react-jsx": "^7.23.4",
-    "@craco/craco": "^7.1.0",
     "@types/node": "*",
-    "@types/three": "0.161.2",
-    "eslint": "^8.57.0",
-    "eslint-config-standard": "^17.1.0",
+    "@types/three": "0.170.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.0.11",
     "lint-staged": "^16.2.3",
+    "neostandard": "^0.13.0",
     "postcss": "^8.4.35",
     "react-proptypes-generate": "^1.7.6",
-    "react-scripts": "5.0.1",
-    "typescript": ">=5"
+    "typescript": ">=5",
+    "vite": "^5.0.0"
   },
   "resolutions": {
-    "@react-three/drei": "9.99.4",
+    "three": "0.170.0",
     "three-stdlib": "link:../three-stdlib"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test --env=jsdom",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"No tests configured\" && exit 0",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
     "prepare": "husky"
   },
   "browserslist": [

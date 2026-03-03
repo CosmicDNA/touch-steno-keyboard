@@ -1,5 +1,5 @@
-import { box, decrypt, encrypt, generateKeyPair, hexDecode, hexEncode, newNonce, urlSafeEncrypt } from './encryption'
-import { getKey, setKey } from './keyStorage'
+import { box, decrypt, encrypt, generateKeyPair, hexDecode, hexEncode, newNonce, urlSafeEncrypt } from './encryption.mjs'
+import { getKey, setKey } from './keyStorage.mjs'
 
 let pairA = getKey()
 if (!pairA) {

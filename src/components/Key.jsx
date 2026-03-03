@@ -3,7 +3,7 @@ import React from 'react'
 import { Material } from 'three'
 
 import AnyKey from './AnyKey'
-import useKeyGeometry from './hooks/useKeyGeometry' // Import Material
+import useKeyGeometry from './hooks/useKeyGeometry.mjs' // Import Material
 
 /**
  * Represents a Key component.

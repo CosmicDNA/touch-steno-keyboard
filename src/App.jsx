@@ -14,16 +14,15 @@ import { Vector3 } from 'three'
 
 import styles from './App.module.css' // This import is now used
 import Grid from './components/Grid'
-import usePersistedControls from './components/hooks/use-persisted-controls.js'
-import useUrlParam from './components/hooks/use-url-param.js'
-import useFullScreen from './components/hooks/useFullScreen.js'
-import useTheme from './components/hooks/useTheme'
-import { TunnelProvider, useTunnelContext } from './components/hooks/useTunnel.js'
+import usePersistedControls from './components/hooks/use-persisted-controls.mjs'
+import useUrlParam from './components/hooks/use-url-param.mjs'
+import useFullScreen from './components/hooks/useFullScreen.mjs'
+import useTheme from './components/hooks/useTheme.mjs'
+import { TunnelProvider, useTunnelContext } from './components/hooks/useTunnel'
 import { useWebSocketContext, WebSocketProvider } from './components/hooks/useWebSocket'
-// import ReactOrbitControls from './components/controls/ReactOrbitControls.js'
-import SpeedGraph from './components/SpeedGraph.js'
+import SpeedGraph from './components/SpeedGraph'
 import StenoKeyboard from './components/StenoKeyboard'
-import { getClientPublicKeyHex } from './components/utils/encryptionWrapper.js'
+import { getClientPublicKeyHex } from './components/utils/encryptionWrapper.mjs'
 
 const publicKey = getClientPublicKeyHex()
 

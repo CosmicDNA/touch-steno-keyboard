@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 import { Material, Vector3 } from 'three'
 
 import AnyKey from './AnyKey'
-import useKeyGeometry from './hooks/useKeyGeometry' // Import Material
+import useKeyGeometry from './hooks/useKeyGeometry.mjs' // Import Material
 
 const RawKey = ({ geometry, name, position, theKey, i, ...props }) => {
   const getKey = (key, attribute) => {

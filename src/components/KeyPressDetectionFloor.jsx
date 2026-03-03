@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 import { Raycaster, Vector2 } from 'three'
 
-import useMultiTouchDrag from './hooks/use-multi-touch-drag'
-import { eqSet, getCircularPoints } from './utils/tools'
+import useMultiTouchDrag from './hooks/use-multi-touch-drag.mjs'
+import { eqSet, getCircularPoints } from './utils/tools.mjs'
 // import { useTunnelContext } from './hooks/useTunnel'
 // import JSONPretty from 'react-json-pretty'
 
