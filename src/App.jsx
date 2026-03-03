@@ -1,27 +1,29 @@
-import PropTypes from 'prop-types'
-import React, { useState, useMemo, useEffect, useRef } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
-import StenoKeyboard from './components/StenoKeyboard'
-import { WebSocketProvider, useWebSocketContext } from './components/hooks/useWebSocket'
-import { TunnelProvider, useTunnelContext } from './components/hooks/useTunnel.js'
-import Grid from './components/Grid'
-import { Vector3 } from 'three'
-import { atomWithStorage, createJSONStorage } from 'jotai/utils'
-import { useAtom } from 'jotai'
 // import JSONPretty from 'react-json-pretty'
 import 'react-json-pretty/themes/monikai.css'
-import styles from './App.module.css' // This import is now used
-import useTheme from './components/hooks/useTheme'
-import usePersistedControls from './components/hooks/use-persisted-controls.js'
-import useFullScreen from './components/hooks/useFullScreen.js'
-import { ToastContainer, toast } from 'react-toastify'
+
+import { OrbitControls } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Scanner } from '@yudiel/react-qr-scanner'
-import { getClientPublicKeyHex } from './components/utils/encryptionWrapper.js'
+import { useAtom } from 'jotai'
+import { atomWithStorage, createJSONStorage } from 'jotai/utils'
+import PropTypes from 'prop-types'
+import { Perf } from 'r3f-perf'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
+import { Vector3 } from 'three'
+
+import styles from './App.module.css' // This import is now used
+import Grid from './components/Grid'
+import usePersistedControls from './components/hooks/use-persisted-controls.js'
 import useUrlParam from './components/hooks/use-url-param.js'
+import useFullScreen from './components/hooks/useFullScreen.js'
+import useTheme from './components/hooks/useTheme'
+import { TunnelProvider, useTunnelContext } from './components/hooks/useTunnel.js'
+import { useWebSocketContext, WebSocketProvider } from './components/hooks/useWebSocket'
 // import ReactOrbitControls from './components/controls/ReactOrbitControls.js'
 import SpeedGraph from './components/SpeedGraph.js'
+import StenoKeyboard from './components/StenoKeyboard'
+import { getClientPublicKeyHex } from './components/utils/encryptionWrapper.js'
 
 const publicKey = getClientPublicKeyHex()
 
@@ -255,7 +257,7 @@ const Tunneled = () => {
         <button className={styles.button} onClick={() => setShowScanner(true)}>Scan QR</button>
       </div>
       <div>
-        <ToastContainer theme={theme}/>
+        <ToastContainer theme={theme} />
       </div>
       <Canvas shadows camera={{ position: Object.values(persistentCameraPosition), fov: 25 }}>
         {kControls.performanceMonitor && <Perf position='bottom-right' />}
@@ -274,7 +276,7 @@ const Tunneled = () => {
             queryParams={queryParams}
           >
             <SessionHandler />
-            <StenoKeyboard controls={kControls} isTouchDevice={isTouchDevice}/>
+            <StenoKeyboard controls={kControls} isTouchDevice={isTouchDevice} />
           </WebSocketProvider>
           <OrbitControls
             onEnd={onOrbitMotionEnd}
@@ -283,14 +285,15 @@ const Tunneled = () => {
             minPolarAngle={0}
             dampingFactor={0.05}
             staticMovingFriction={1E-5}
-            enableDamping={true}
+            enableDamping
             maxPolarAngle={Math.PI / 2.1} // Prevents camera from going under the grid
             enableRotate={!kControls.lockPosition}
             enablePan={!kControls.lockPosition}
             enableZoom={!kControls.lockPosition}
           />
           <mesh
-            receiveShadow rotation-x={-Math.PI / 2} position-y={gridY - 0.02}>
+            receiveShadow rotation-x={-Math.PI / 2} position-y={gridY - 0.02}
+          >
             <planeGeometry
               args={[100, 100]}
             />

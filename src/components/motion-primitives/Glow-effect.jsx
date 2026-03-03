@@ -1,7 +1,6 @@
-'use client'
-import React from 'react'
-import PropTypes from 'prop-types'
 import { motion } from 'motion/react'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 /**
  * @typedef {import('motion/react').Transition} Transition

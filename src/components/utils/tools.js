@@ -69,10 +69,10 @@ const editedObject = (object, selector) =>
 
 export {
   dep,
-  eqSet,
-  eqArr,
   editedObject,
-  getUniqueItems,
+  eqArr,
+  eqSet,
   getAddedAndRemovedItems,
-  getCircularPoints
+  getCircularPoints,
+  getUniqueItems
 }

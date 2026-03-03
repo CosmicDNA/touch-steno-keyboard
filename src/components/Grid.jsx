@@ -1,13 +1,13 @@
+import { Instance, Instances } from '@react-three/drei'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { Instances, Instance } from '@react-three/drei'
 
 const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5, ...props }) => (
   // Renders a grid and crosses as instances
-  <Instances {...props} >
-    {/* eslint-disable-next-line react/no-unknown-property */}
+  <Instances {...props}>
+    {}
     <planeGeometry args={[lineWidth, height]} />
-    <meshBasicMaterial color="#999" />
+    <meshBasicMaterial color='#999' />
     {Array.from({ length: number }, (_, y) =>
       Array.from({ length: number }, (_, x) => (
 
@@ -17,7 +17,7 @@ const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5, ...props }) => (
         </group>
       ))
     )}
-    {/* eslint-disable-next-line react/no-unknown-property */}
+    {}
     <gridHelper args={[100, 100, '#bbb', '#bbb']} position={[0, -0.01, 0]} />
   </Instances>
 )

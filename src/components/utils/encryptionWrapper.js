@@ -1,4 +1,4 @@
-import { urlSafeEncrypt, decrypt, box, generateKeyPair, hexEncode, hexDecode, newNonce, encrypt } from './encryption'
+import { box, decrypt, encrypt, generateKeyPair, hexDecode, hexEncode, newNonce, urlSafeEncrypt } from './encryption'
 import { getKey, setKey } from './keyStorage'
 
 let pairA = getKey()
@@ -57,4 +57,4 @@ const getClientPublicKeyHex = () => {
   return hexEncode(pairA.publicKey)
 }
 
-export { encryptionProcess, getDecryptedMessage, getBox, getEncryptedMessage, newNonce, getClientPublicKeyHex }
+export { encryptionProcess, getBox, getClientPublicKeyHex, getDecryptedMessage, getEncryptedMessage, newNonce }

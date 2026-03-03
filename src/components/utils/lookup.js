@@ -65,6 +65,6 @@ const convertLookupStrokeToKeysSequence = (lookupStroke) => {
 }
 
 export {
-  LookupStateEnum,
-  convertLookupStrokeToKeysSequence
+  convertLookupStrokeToKeysSequence,
+  LookupStateEnum
 }
