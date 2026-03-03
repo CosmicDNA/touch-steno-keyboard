@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import React, { useState, useMemo, useEffect } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import StenoKeyboard from './components/StenoKeyboard'
@@ -20,6 +20,8 @@ import { ToastContainer, toast } from 'react-toastify'
 import { Scanner } from '@yudiel/react-qr-scanner'
 import { getClientPublicKeyHex } from './components/utils/encryptionWrapper.js'
 import useUrlParam from './components/hooks/use-url-param.js'
+// import ReactOrbitControls from './components/controls/ReactOrbitControls.js'
+import SpeedGraph from './components/SpeedGraph.js'
 
 const publicKey = getClientPublicKeyHex()
 
@@ -42,16 +44,28 @@ const getBaseAndParams = (_url) => {
  * @param {{scheduledCameraPositionSave: {scheduled: Boolean, setPersistentCameraPosition: func} setScheduledCameraPositionSave: func}} param0
  * @returns
  */
-const ReactToCameraChange = ({ onCameraUpdate, children, trackCamera = true }) => {
-  let previousCameraPosition = new Vector3()
+const ReactToCameraChange = ({ onCameraUpdate, children }) => {
+  const { camera } = useThree()
+  const previousCameraPosition = useRef(camera.position.clone())
+  const previousSpeed = useRef(new Vector3())
+  const onCameraUpdateRef = useRef(onCameraUpdate)
+
+  useEffect(() => {
+    onCameraUpdateRef.current = onCameraUpdate
+  }, [onCameraUpdate])
+
   useFrame(({ camera }, clockDelta) => {
-    if (trackCamera) {
-      const position = camera.position
-      const cameraPositionDelta = position.clone().sub(previousCameraPosition)
-      const speed = cameraPositionDelta.clone().divideScalar(clockDelta)
-      onCameraUpdate({ speed, position })
-      previousCameraPosition = position.clone()
+    const position = camera.position
+    const cameraPositionDelta = position.clone().sub(previousCameraPosition.current)
+    const instantaneousSpeed = cameraPositionDelta.clone().divideScalar(clockDelta)
+    // drop the exponential smoothing; we want an exact zero when the camera
+    // stops moving so our marker logic can fire. also clamp tiny residuals.
+    previousSpeed.current.copy(instantaneousSpeed)
+    if (previousSpeed.current.length() < 1e-6) {
+      previousSpeed.current.set(0, 0, 0)
     }
+    onCameraUpdateRef.current({ speed: previousSpeed.current.clone(), position })
+    previousCameraPosition.current.copy(position)
   })
 
   return (
@@ -62,7 +76,6 @@ const ReactToCameraChange = ({ onCameraUpdate, children, trackCamera = true }) =
 }
 ReactToCameraChange.propTypes = {
   onCameraUpdate: PropTypes.func.isRequired,
-  trackCamera: PropTypes.bool,
   children: PropTypes.any
 }
 
@@ -126,6 +139,7 @@ const Tunneled = () => {
   const kControls = usePersistedControls('Keyboard', kSchema)
   const [storedWebsocketUrl, setStoredWebsocketUrl] = useAtom(websocketUrlAtom)
   const [activeWebsocketUrl, setActiveWebsocketUrl] = useState(storedWebsocketUrl)
+  const speedHistory = useRef([])
 
   useEffect(() => {
     if (storedWebsocketUrl && !activeWebsocketUrl) {
@@ -146,10 +160,15 @@ const Tunneled = () => {
   }, [floorColor])
 
   const [persistentCameraPosition, setPersistentCameraPosition] = useAtom(cameraAtom)
-  const [trackCamera, setTrackCamera] = useState(false)
+  // track the previous frame's speed so we can spot the instant the camera
+  // arrives at a full stop. since the controls now guarantee exact zero we
+  // simply look for a transition from >0 to 0.
+  const lastSpeedRef = useRef(0)
 
-  const onOrbitMotionEnd = (event) => {
-    setTrackCamera(true)
+  // `onOrbitMotionEnd` is still passed to the controls for logging/metrics,
+  // but it no longer affects marker logic.
+  const onOrbitMotionEnd = () => {
+    // nothing to do here; kept for backwards compatibility
   }
 
   const relay = useUrlParam('relay')
@@ -174,12 +193,19 @@ const Tunneled = () => {
 
   const onCameraUpdate = ({ speed, position }) => {
     const speedModule = speed.length()
-    if (speedModule < 1E-3) {
-      // Pretty much stabilised
-      setTrackCamera(false)
+    const historyItem = { speed: speedModule, marker: null }
+    speedHistory.current.push(historyItem)
+    if (speedHistory.current.length > 500) speedHistory.current.shift()
+
+    // OrbitControls now clamps its velocity deltas to zero when static
+    // friction has brought the camera to rest. simply look for the transition
+    // from nonzero to zero speed and tag that frame.
+    if (lastSpeedRef.current > 0 && speedModule === 0) {
+      historyItem.marker = 'static'
       setPersistentCameraPosition(position)
-      // console.log('Saved to persistent storage camera position:', position)
     }
+
+    lastSpeedRef.current = speedModule
   }
 
   const { parent, child } = styles
@@ -214,6 +240,7 @@ const Tunneled = () => {
 
   return (
     <div className={parent}>
+      <SpeedGraph dataRef={speedHistory} />
       {showScanner && (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 100, background: 'black' }}>
           <Scanner
@@ -232,7 +259,7 @@ const Tunneled = () => {
       </div>
       <Canvas shadows camera={{ position: Object.values(persistentCameraPosition), fov: 25 }}>
         {kControls.performanceMonitor && <Perf position='bottom-right' />}
-        <ReactToCameraChange {...{ onCameraUpdate, trackCamera }}>
+        <ReactToCameraChange {...{ onCameraUpdate }}>
           <ambientLight intensity={0.5} />
           <directionalLight
             castShadow={kControls.showShadows}
@@ -255,6 +282,7 @@ const Tunneled = () => {
             // The camera position is now persisted via the Jotai atom
             minPolarAngle={0}
             dampingFactor={0.05}
+            staticMovingFriction={1E-5}
             enableDamping={true}
             maxPolarAngle={Math.PI / 2.1} // Prevents camera from going under the grid
             enableRotate={!kControls.lockPosition}
