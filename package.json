@@ -51,6 +51,10 @@
     "react-scripts": "5.0.1",
     "typescript": ">=5"
   },
+  "resolutions": {
+    "@react-three/drei": "9.99.4",
+    "three-stdlib": "link:../three-stdlib"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
