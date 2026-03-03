@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 
 import ColoredCircle from '../ColoredCircle'
-import { getBox, getDecryptedMessage, getEncryptedMessage, newNonce } from '../utils/encryptionWrapper'
+import { getBox, getDecryptedMessage, getEncryptedMessage, newNonce } from '../utils/encryptionWrapper.mjs'
 import { useTunnelContext } from './useTunnel'
 
 const { CONNECTING, OPEN, CLOSING, CLOSED, UNINSTANTIATED } = ReadyState

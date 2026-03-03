@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
 import { ExtrudeGeometry, Material } from 'three'
 
-import InterMediumRegular from '../fonts/Inter_Medium_Regular.json'
-import useMount from './hooks/useMount'
+import InterMediumRegular from '@/assets/fonts/Inter_Medium_Regular.json'
+
+import useMount from './hooks/useMount.mjs'
 
 /**
  * Represents a Key component.

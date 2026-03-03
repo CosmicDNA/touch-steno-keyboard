@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-import useOnMount from './use-on-mount'
+import useOnMount from './use-on-mount.mjs'
 
 /**
  *
