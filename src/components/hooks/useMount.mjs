@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 
 import useOnMount from './use-on-mount.mjs'
 
@@ -10,22 +10,22 @@ import useOnMount from './use-on-mount.mjs'
  */
 const useMount = (callback = () => {}, deps = []) => {
 // Ref to track component mount state
-  const isMounted = useRef(false)
+  const [isMounted, setIsMounted] = useState(false)
 
   useOnMount(() => {
     // Component has mounted, set the flag
     if (!isMounted.current) {
-      isMounted.current = true
+      setIsMounted(true)
       callback()
     }
 
     // Cleanup function to reset the flag when component unmounts
     return () => {
-      isMounted.current = false
+      setIsMounted(false)
     }
   }, deps)
 
-  return { isMounted: isMounted.current }
+  return { isMounted }
 }
 
 export default useMount
