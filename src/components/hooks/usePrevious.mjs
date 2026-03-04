@@ -1,14 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 const usePrevious = (value, defaultValue) => {
-  const ref = useRef(defaultValue)
-  const setPrevious = value => {
-    ref.current = value
-  }
+  const [previous, setPrevious] = useState(defaultValue)
   useEffect(() => {
-    ref.current = value
-  })
-  const previous = ref.current
+    setPrevious(value)
+  }, [value])
   return [previous, setPrevious]
 }
 
