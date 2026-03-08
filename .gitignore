@@ -3,3 +3,4 @@ build/
 .cert/
 .env*
 .node-version
+dist/
