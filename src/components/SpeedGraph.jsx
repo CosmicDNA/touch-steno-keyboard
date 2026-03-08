@@ -9,6 +9,12 @@ const SpeedGraph = ({ dataRef }) => {
     const ctx = canvas.getContext('2d')
     let animationFrameId
 
+    const handleResize = () => {
+      canvas.width = window.innerWidth
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+
     const render = () => {
       const { width, height } = canvas
       ctx.clearRect(0, 0, width, height)
@@ -55,10 +61,13 @@ const SpeedGraph = ({ dataRef }) => {
       animationFrameId = requestAnimationFrame(render)
     }
     render()
-    return () => cancelAnimationFrame(animationFrameId)
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [dataRef])
 
-  return <canvas ref={canvasRef} width={600} height={100} style={{ position: 'absolute', bottom: 10, left: 10, zIndex: 9999, background: 'rgba(0,0,0,0.2)', pointerEvents: 'none' }} />
+  return <canvas ref={canvasRef} height={100} style={{ position: 'absolute', bottom: 0, left: 0, zIndex: 9999, background: 'rgba(0,0,0,0.2)', pointerEvents: 'none' }} />
 }
 
 SpeedGraph.propTypes = {
