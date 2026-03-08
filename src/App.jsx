@@ -174,6 +174,7 @@ const Tunneled = () => {
   }
 
   const relay = useUrlParam('relay')
+  const isDebug = useUrlParam('debug')
 
   // const lookupState = useRef(LookupStateEnum.IDLE)
   useEffect(() => {
@@ -243,7 +244,7 @@ const Tunneled = () => {
 
   return (
     <div className={parent}>
-      <SpeedGraph dataRef={speedHistory} />
+      {isDebug && <SpeedGraph dataRef={speedHistory} />}
       {showScanner && (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 100, background: 'black' }}>
           <Scanner
@@ -285,7 +286,7 @@ const Tunneled = () => {
             // The camera position is now persisted via the Jotai atom
             minPolarAngle={0}
             dampingFactor={0.05}
-            staticMovingFriction={1E-5}
+            staticMovingFriction={1E-4}
             enableDamping
             maxPolarAngle={Math.PI / 2.1} // Prevents camera from going under the grid
             enableRotate={!kControls.lockPosition}
