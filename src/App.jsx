@@ -144,6 +144,7 @@ const Tunneled = () => {
 
   useEffect(() => {
     if (storedWebsocketUrl && !activeWebsocketUrl) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveWebsocketUrl(storedWebsocketUrl)
     }
   }, [storedWebsocketUrl, activeWebsocketUrl])
@@ -181,6 +182,7 @@ const Tunneled = () => {
 
       const newUrlData = getBaseAndParams(relay)
       setStoredWebsocketUrl(newUrlData)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveWebsocketUrl(newUrlData)
       console.info(`WebSocket URL set to ${relay}`)
 
