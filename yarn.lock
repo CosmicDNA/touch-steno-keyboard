@@ -2776,9 +2776,9 @@ its-fine@^1.0.6:
     "@types/react-reconciler" "^0.28.0"
 
 jotai@^2.7.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.18.0.tgz#b62c682d8e7c20eb94a8a68eead4188359e66f31"
-  integrity sha512-XI38kGWAvtxAZ+cwHcTgJsd+kJOJGf3OfL4XYaXWZMZ7IIY8e53abpIHvtVn1eAgJ5dlgwlGFnP4psrZ/vZbtA==
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.18.1.tgz#3176142b123d559f55a2b87e2cf1dd75e4db7271"
+  integrity sha512-e0NOzK+yRFwHo7DOp0DS0Ycq74KMEAObDWFGmfEL28PD9nLqBTt3/Ug7jf9ca72x0gC9LQZG9zH+0ISICmy3iA==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -3868,12 +3868,7 @@ tapable@^2.3.0:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.3.0.tgz#7e3ea6d5ca31ba8e078b560f0d83ce9a14aa8be6"
   integrity sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==
 
-three-mesh-bvh@^0.7.8:
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.7.8.tgz#83156e4d3945734db076de1c94809331481b3fdd"
-  integrity sha512-BGEZTOIC14U0XIRw3tO4jY7IjP7n7v24nv9JXS1CyeVRWOCkcOMhRnmENUjuV39gktAw4Ofhr0OvIAiTspQrrw==
-
-three-mesh-bvh@^0.8.3:
+three-mesh-bvh@0.8.3, three-mesh-bvh@^0.7.8, three-mesh-bvh@^0.8.3:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.8.3.tgz#c5e72472e7f062ff79084157a25c122d73184163"
   integrity sha512-4G5lBaF+g2auKX3P0yqx+MJC6oVt6sB5k+CchS6Ob0qvH0YIhuUk1eYr7ktsIpY+albCqE80/FVQGV190PmiAg==
