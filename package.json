@@ -55,7 +55,8 @@
   },
   "resolutions": {
     "three": "0.170.0",
-    "three-stdlib": "https://github.com/CosmicDNA/three-stdlib/releases/latest/download/three-stdlib-dist.tar.gz"
+    "three-stdlib": "https://github.com/CosmicDNA/three-stdlib/releases/latest/download/three-stdlib-dist.tar.gz",
+    "three-mesh-bvh": "0.8.3"
   },
   "scripts": {
     "dev": "vite",
