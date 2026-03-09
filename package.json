@@ -25,6 +25,7 @@
     "react-json-pretty": "^2.2.0",
     "react-toastify": "^11.0.5",
     "react-use-websocket": "^4.8.1",
+    "three-stdlib": "https://github.com/CosmicDNA/three-stdlib/releases/latest/download/three-stdlib-dist.tar.gz",
     "tunnel-rat": "^0.1.2",
     "tweetnacl": "^1.0.3",
     "tweetnacl-util": "^0.15.1",
@@ -54,7 +55,7 @@
   },
   "resolutions": {
     "three": "0.170.0",
-    "three-stdlib": "link:../three-stdlib"
+    "three-stdlib": "https://github.com/CosmicDNA/three-stdlib/releases/latest/download/three-stdlib-dist.tar.gz"
   },
   "scripts": {
     "dev": "vite",

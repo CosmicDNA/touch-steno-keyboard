@@ -8,8 +8,13 @@ export default defineConfig({
     alias: {
       '@': '/src',
       // ensure all imports of three resolve to the single node_modules copy
-      three: path.resolve(__dirname, 'node_modules/three')
+      three: path.resolve(__dirname, 'node_modules/three'),
+      // force all packages to use the custom three-stdlib
+      'three-stdlib': path.resolve(__dirname, 'node_modules/three-stdlib')
     }
+  },
+  optimizeDeps: {
+    include: ['three-stdlib']
   },
   server: {
     allowedHosts: [
