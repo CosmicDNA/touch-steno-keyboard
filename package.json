@@ -50,6 +50,7 @@
     "neostandard": "^0.13.0",
     "postcss": "^8.4.35",
     "react-proptypes-generate": "^1.7.6",
+    "rollup-plugin-visualizer": "^7.0.1",
     "typescript": ">=5",
     "vite": "^5.0.0"
   },

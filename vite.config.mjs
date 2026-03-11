@@ -1,20 +1,38 @@
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), visualizer({
+    filename: 'rollup-visualiser-stats.html',
+    template: 'treemap',
+    gzipSize: true,
+    brotliSize: true,
+  })],
   resolve: {
     alias: {
       '@': '/src',
-      // ensure all imports of three resolve to the single node_modules copy
       three: path.resolve(__dirname, 'node_modules/three'),
-      // force all packages to use the custom three-stdlib
       'three-stdlib': path.resolve(__dirname, 'node_modules/three-stdlib')
     }
   },
   optimizeDeps: {
     include: ['three-stdlib']
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-three': ['three', '@react-three/fiber', '@react-three/drei', 'three-stdlib'],
+          'vendor-ui': ['react-toastify', 'leva', 'motion'],
+          'vendor-crypto': ['tweetnacl', 'tweetnacl-util'],
+          'vendor-state': ['jotai', 'tunnel-rat', 'react-use-websocket'],
+          'vendor-other': ['howler', '@yudiel/react-qr-scanner', 'lodash']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   },
   server: {
     allowedHosts: [

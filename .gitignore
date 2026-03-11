@@ -4,3 +4,4 @@ build/
 .env*
 .node-version
 dist/
+rollup-visualiser-stats.html
