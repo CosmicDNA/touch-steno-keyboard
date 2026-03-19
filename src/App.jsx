@@ -13,6 +13,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import { Vector3 } from 'three'
 
 import styles from './App.module.css' // This import is now used
+import Octocat from './assets/github-octocat.svg'
 import Grid from './components/Grid'
 import usePersistedControls from './components/hooks/use-persisted-controls.mjs'
 import useUrlParam from './components/hooks/use-url-param.mjs'
@@ -257,6 +258,17 @@ const Tunneled = () => {
       <div className={child}>
         <status.Out />
         <button className={styles.button} onClick={() => setShowScanner(true)}>Scan QR</button>
+      </div>
+      <div style={{ position: 'absolute', bottom: 20, left: 20, zIndex: 10 }}>
+        <a href='https://github.com/CosmicDNA/touch-steno-keyboard' target='_blank' rel='noreferrer'>
+          <img
+            src={Octocat}
+            alt='Octocat'
+            width={60}
+            height={60}
+            style={{ filter: theme === 'dark' ? 'drop-shadow(0 0 3px white)' : 'none' }}
+          />
+        </a>
       </div>
       <div>
         <ToastContainer theme={theme} />
